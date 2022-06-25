@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
+using Collecting.Data;
 
 namespace Collecting.Controllers
 {
     public class HomeController : Controller
     {
+        ApplicationDbContext _context;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
