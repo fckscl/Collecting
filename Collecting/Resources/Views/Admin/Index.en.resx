@@ -117,19 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Admin" xml:space="preserve">
-    <value>Администрирование</value>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
-  <data name="Hello" xml:space="preserve">
-    <value>Здравствуйте, </value>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Вход</value>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Выйти</value>
-  </data>
-  <data name="Register" xml:space="preserve">
-    <value>Регистрация</value>
+  <data name="List" xml:space="preserve">
+    <value>List of users</value>
   </data>
 </root>

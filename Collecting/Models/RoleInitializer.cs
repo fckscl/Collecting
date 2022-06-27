@@ -13,9 +13,9 @@ namespace Collecting.Models
             {
                 await roleManager.CreateAsync(new IdentityRole("admin"));
             }
-            if (await roleManager.FindByNameAsync("employee") == null)
+            if (await roleManager.FindByNameAsync("active") == null)
             {
-                await roleManager.CreateAsync(new IdentityRole("employee"));
+                await roleManager.CreateAsync(new IdentityRole("active"));
             }
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
