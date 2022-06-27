@@ -5,9 +5,9 @@ namespace Collecting.Models
 {
     public class RoleInitializer
     {
-        public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task InitializeAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            string adminEmail = "admin@gmail.com";
+            string adminEmail = "dimapugach31102003@gmail.com";
             string password = "_Aa123456";
             if (await roleManager.FindByNameAsync("admin") == null)
             {
@@ -19,7 +19,7 @@ namespace Collecting.Models
             }
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
-                User admin = new User { Email = adminEmail, UserName = adminEmail };
+                IdentityUser admin = new IdentityUser { Email = adminEmail, UserName = adminEmail };
                 IdentityResult result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
                 {
