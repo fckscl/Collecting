@@ -115,8 +115,9 @@ namespace Collecting.Controllers
                 {
                     await _userManager.AddToRolesAsync(user, act);
                 }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return NotFound();
         }
 
         [HttpPost]
@@ -137,8 +138,9 @@ namespace Collecting.Controllers
                 {
                     await _userManager.AddToRolesAsync(user, act);
                 }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return NotFound();
         }
     }
 }
