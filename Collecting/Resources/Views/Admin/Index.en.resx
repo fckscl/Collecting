@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Block" xml:space="preserve">
+    <value>Block</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -128,5 +131,11 @@
   </data>
   <data name="List" xml:space="preserve">
     <value>List of users</value>
+  </data>
+  <data name="MakeAdmin" xml:space="preserve">
+    <value>Make Admin</value>
+  </data>
+  <data name="Unblock" xml:space="preserve">
+    <value>Unblock</value>
   </data>
 </root>

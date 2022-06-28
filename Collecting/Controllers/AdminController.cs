@@ -2,20 +2,24 @@
 using Microsoft.AspNetCore.Identity;
 using Collecting.Models;
 using Microsoft.AspNetCore.Authorization;
+using Collecting.ViewModels;
 
 namespace Collecting.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
         UserManager<IdentityUser> _userManager;
+        RoleManager<IdentityRole> _roleManager;
 
-        public AdminController(UserManager<IdentityUser> userManager)
+        public AdminController(UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
-        [Authorize(Roles = "admin")]
-        public IActionResult Index() => View(_userManager.Users.ToList());
+        public ActionResult Index() => View(_userManager.Users.ToList());
 
         //public IActionResult Create() => View();
 
@@ -87,7 +91,52 @@ namespace Collecting.Controllers
             IdentityUser user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
-                IdentityResult result = await _userManager.DeleteAsync(user);
+                await _userManager.DeleteAsync(user);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Block(string userId)
+        {
+            // получаем пользователя
+            IdentityUser user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                // получем список ролей пользователя
+                var userRoles = await _userManager.GetRolesAsync(user);
+                string[] act = { "active" };
+                if (userRoles.Contains("active"))
+                {
+                    
+                    await _userManager.RemoveFromRolesAsync(user, act);
+                }
+                else
+                {
+                    await _userManager.AddToRolesAsync(user, act);
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> MakeAdmin(string userId)
+        {
+            // получаем пользователя
+            IdentityUser user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                // получем список ролей пользователя
+                var userRoles = await _userManager.GetRolesAsync(user);
+                string[] act = { "admin" };
+                if (userRoles.Contains("admin"))
+                {
+                    await _userManager.RemoveFromRolesAsync(user, act);
+                }
+                else
+                {
+                    await _userManager.AddToRolesAsync(user, act);
+                }
             }
             return RedirectToAction("Index");
         }
