@@ -21,70 +21,6 @@ namespace Collecting.Controllers
 
         public ActionResult Index() => View(_userManager.Users.ToList());
 
-        //public IActionResult Create() => View();
-
-        //[HttpPost]
-        //public async Task<IActionResult> Create(CreateUserViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        IdentityUser user = new IdentityUser { Email = model.Email, UserName = model.Email, Year = model.Year };
-        //        var result = await _userManager.CreateAsync(user, model.Password);
-        //        if (result.Succeeded)
-        //        {
-        //            return RedirectToAction("Index");
-        //        }
-        //        else
-        //        {
-        //            foreach (var error in result.Errors)
-        //            {
-        //                ModelState.AddModelError(string.Empty, error.Description);
-        //            }
-        //        }
-        //    }
-        //    return View(model);
-        //}
-
-        //public async Task<IActionResult> Edit(string id)
-        //{
-        //    IdentityUser user = await _userManager.FindByIdAsync(id);
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email, Year = user.Year };
-        //    return View(model);
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(EditUserViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        IdentityUser user = await _userManager.FindByIdAsync(model.Id);
-        //        if (user != null)
-        //        {
-        //            user.Email = model.Email;
-        //            user.UserName = model.Email;
-        //            user.Year = model.Year;
-
-        //            var result = await _userManager.UpdateAsync(user);
-        //            if (result.Succeeded)
-        //            {
-        //                return RedirectToAction("Index");
-        //            }
-        //            else
-        //            {
-        //                foreach (var error in result.Errors)
-        //                {
-        //                    ModelState.AddModelError(string.Empty, error.Description);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return View(model);
-        //}
-
         [HttpPost]
         public async Task<ActionResult> Delete(string id)
         {
@@ -97,10 +33,10 @@ namespace Collecting.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Block(string userId)
+        public async Task<ActionResult> Block(string id)
         {
             // получаем пользователя
-            IdentityUser user = await _userManager.FindByIdAsync(userId);
+            IdentityUser user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
                 // получем список ролей пользователя
@@ -121,15 +57,15 @@ namespace Collecting.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> MakeAdmin(string userId)
+        public async Task<ActionResult> MakeAdmin(string id)
         {
             // получаем пользователя
-            IdentityUser user = await _userManager.FindByIdAsync(userId);
+            IdentityUser user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
                 // получем список ролей пользователя
                 var userRoles = await _userManager.GetRolesAsync(user);
-                string[] act = { "admin" };
+                string[] act = { "admin", "active" };
                 if (userRoles.Contains("admin"))
                 {
                     await _userManager.RemoveFromRolesAsync(user, act);

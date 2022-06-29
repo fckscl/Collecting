@@ -2,7 +2,7 @@
 
 namespace Collecting.Models
 {
-    public class Collections
+    public class Collection
     {
         public int Id { get; set; }
         public string Name { get; set; } = "";

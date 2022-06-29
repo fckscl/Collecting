@@ -10,20 +10,21 @@ namespace Collecting.Controllers
 {
     public class HomeController : Controller
     {
-        //ApplicationDbContext _context;
-        //private readonly ILogger<HomeController> _logger;
+        ApplicationContext db;
+        private readonly ILogger<HomeController> _logger;
 
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
+        public HomeController(ILogger<HomeController> logger, ApplicationContext context)
+        {
+            _logger = logger;
+            db = context;
+        }
 
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "active")]
         public IActionResult Privacy()
         {
             return View();
