@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Collecting.Data;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Collecting.Controllers
 {
@@ -19,9 +20,23 @@ namespace Collecting.Controllers
             db = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
+        {
+            return View(await db.Collections.ToListAsync());
+        }
+
+        [Authorize(Roles = "active")]
+        public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Collection col)
+        {
+            db.Collections.Add(col);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "active")]

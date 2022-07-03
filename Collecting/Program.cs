@@ -2,18 +2,11 @@ using Collecting.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Collecting.Models;
-using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseSqlServer(connectionString));
@@ -25,7 +18,6 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews().AddViewLocalization();
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-//var host = CreateHostBuilder(args).Build();
 var app = builder.Build();
 
 var host = app.Services.GetRequiredService<IServiceScopeFactory>();

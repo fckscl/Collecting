@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+@model IEnumerable<Collecting.Models.Collection>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -7,4 +8,13 @@
 <div class="text-center">
     <h1 class="display-4">@Localizer["Start"]</h1>
     <p>@Localizer["Learn"]</p>
+    <table class="table">
+        <tr><th>Имя</th><th>Возраст</th></tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+            </tr>
+        }
+    </table>
 </div>
