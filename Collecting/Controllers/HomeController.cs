@@ -11,10 +11,10 @@ namespace Collecting.Controllers
 {
     public class HomeController : Controller
     {
-        ApplicationContext db;
+        ApplicationDbContext db;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
             db = context;
@@ -31,9 +31,11 @@ namespace Collecting.Controllers
             return View();
         }
 
+        [Authorize(Roles = "active")]
         [HttpPost]
         public async Task<IActionResult> Create(Collection col)
         {
+            col.UserId = User.Identity?.Name!;
             db.Collections.Add(col);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Create new collection</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
   <data name="Learn" xml:space="preserve">
     <value>You are on the start page of the project</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name of collection</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Welcome!</value>

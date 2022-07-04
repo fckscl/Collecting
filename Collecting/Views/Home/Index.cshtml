@@ -9,7 +9,7 @@
     <h1 class="display-4">@Localizer["Start"]</h1>
     <p>@Localizer["Learn"]</p>
     <table class="table">
-        <tr><th>Имя</th><th>Возраст</th></tr>
+        <tr><th>@Localizer["Name"] </th><th>@Localizer["Author"] </th></tr>
         @foreach (var item in Model)
         {
             <tr>
@@ -17,4 +17,5 @@
             </tr>
         }
     </table>
+    <a asp-action="Create">@Localizer["Add"]</a>
 </div>
