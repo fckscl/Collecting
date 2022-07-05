@@ -60,6 +60,18 @@ namespace Collecting.Controllers
             return LocalRedirect(returnUrl);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Search(string SearchTerm)
+        {
+            return View("Index", await db.Collections.Where( j => j.Name.Contains(SearchTerm)).ToListAsync());
+        }
+
+        public IActionResult Items()
+        {
+            //var items = db.;
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
