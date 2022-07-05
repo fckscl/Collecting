@@ -66,10 +66,23 @@ namespace Collecting.Controllers
             return View("Index", await db.Collections.Where( j => j.Name.Contains(SearchTerm)).ToListAsync());
         }
 
-        public IActionResult Items()
+        public async Task<IActionResult> Items(int id)
         {
-            //var items = db.;
+            return View(await db.Items.Where(j => j.CollectionId == id).ToListAsync());
+        }
+
+        public IActionResult Add()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(Items item, int id)
+        {
+            item.CollectionId = id;
+            db.Items.Add(item);
+            await db.SaveChangesAsync();
+            return View("Items");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
