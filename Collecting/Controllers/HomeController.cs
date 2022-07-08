@@ -18,12 +18,12 @@ namespace Collecting.Controllers
         {
             _logger = logger;
             db = context;
-            //using (var transaction = db.Database.BeginTransaction())
-            //{
-            //    db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Items ON;");
-            //    db.SaveChanges();
-            //    transaction.Commit();
-            //}
+            using (var transaction = db.Database.BeginTransaction())
+            {
+                db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Items ON;");
+                db.SaveChanges();
+                transaction.Commit();
+            }
         }
 
         public async Task<IActionResult> Index()
