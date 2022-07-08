@@ -18,6 +18,12 @@ namespace Collecting.Controllers
         {
             _logger = logger;
             db = context;
+            //using (var transaction = db.Database.BeginTransaction())
+            //{
+            //    db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Items ON;");
+            //    db.SaveChanges();
+            //    transaction.Commit();
+            //}
         }
 
         public async Task<IActionResult> Index()
@@ -63,26 +69,28 @@ namespace Collecting.Controllers
         [HttpPost]
         public async Task<IActionResult> Search(string SearchTerm)
         {
-            return View("Index", await db.Collections.Where( j => j.Name.Contains(SearchTerm)).ToListAsync());
+            return View("Index", await db.Items.Where( j => j.Name.Contains(SearchTerm)).ToListAsync());
         }
 
         public async Task<IActionResult> Items(int id)
         {
+            ViewBag.Id = id;
             return View(await db.Items.Where(j => j.CollectionId == id).ToListAsync());
         }
 
-        public IActionResult Add()
+        public IActionResult Add(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(Items item, int id)
+        public async Task<IActionResult> Add(Items item, int temp)
         {
-            item.CollectionId = id;
+            item.CollectionId = temp;
             db.Items.Add(item);
             await db.SaveChangesAsync();
-            return View("Items");
+            return View("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
