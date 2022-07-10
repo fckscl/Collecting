@@ -117,22 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Admin" xml:space="preserve">
-    <value>Administrating</value>
+  <data name="Collection" xml:space="preserve">
+    <value>Creating new collection</value>
   </data>
-  <data name="Hello" xml:space="preserve">
-    <value>Hello</value>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Logout</value>
-  </data>
-  <data name="Managing" xml:space="preserve">
-    <value>Manage your collections</value>
-  </data>
-  <data name="Register" xml:space="preserve">
-    <value>Register</value>
+  <data name="Name" xml:space="preserve">
+    <value>Name of collection</value>
   </data>
 </root>

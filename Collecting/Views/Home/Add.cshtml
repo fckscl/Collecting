@@ -1,29 +1,30 @@
-﻿@model Collecting.Models.Items
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Collecting.Models.Items
 
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = Localizer["Add"];
 }
 
-<h1>Add</h1>
+<h1>@Localizer["Add"] </h1>
 
-<h4>Items</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="add" asp-controller="home" asp-route-temp=@ViewBag.Id >
+        <form asp-action="Add" asp-controller="Home" >
             <p>
-                <label asp-for="Name" class="control-label" >Имя</label><br />
+                <label asp-for="Name" class="control-label" >@Localizer["Name"] </label><br />
                 <input type="text" asp-for="Name" class="form-control" />
             </p>
             <p>
-                <input type="submit" value="Отправить" class="btn btn-primary" />
+                <input type="submit" value=@Localizer["Submit"] class="btn btn-primary" />
             </p>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@Localizer["Back"]</a>
 </div>
 
 @section Scripts {

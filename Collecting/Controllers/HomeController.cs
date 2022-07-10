@@ -18,16 +18,15 @@ namespace Collecting.Controllers
         {
             _logger = logger;
             db = context;
-            using (var transaction = db.Database.BeginTransaction())
-            {
-                db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Items ON;");
-                db.SaveChanges();
-                transaction.Commit();
-            }
+            
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? id)
         {
+            if (id != null)
+            {
+                return View("Index", await db.Collections.Where(j => j.UserId == id).ToListAsync());
+            }
             return View(await db.Collections.ToListAsync());
         }
 
@@ -69,7 +68,7 @@ namespace Collecting.Controllers
         [HttpPost]
         public async Task<IActionResult> Search(string SearchTerm)
         {
-            return View("Index", await db.Items.Where( j => j.Name.Contains(SearchTerm)).ToListAsync());
+            return View("Items", await db.Items.Where( j => j.Name.Contains(SearchTerm)).ToListAsync());
         }
 
         public async Task<IActionResult> Items(int id)
@@ -85,9 +84,18 @@ namespace Collecting.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(Items item, int temp)
+        public async Task<IActionResult> Add(Items item, int id)
         {
-            item.CollectionId = temp;
+            //using (var transaction = db.Database.BeginTransaction())
+            //{
+            //    db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Collections OFF;");
+            //    db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Items ON;");
+            //    db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Items OFF;");
+            //    db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Collections ON;");
+            //    db.SaveChanges();
+            //    transaction.Commit();
+            //}
+            item.CollectionId = id;
             db.Items.Add(item);
             await db.SaveChangesAsync();
             return View("Index");

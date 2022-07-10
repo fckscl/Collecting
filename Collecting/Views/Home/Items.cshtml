@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<Collecting.Models.Items>
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject Collecting.Data.ApplicationDbContext db
 @{
-    ViewData["Title"] = "Items";
+    ViewData["Title"] = Localizer["Items"];
 }
 
-<h1>Items</h1>
+<h1>@Localizer["Items"] </h1>
 
 <div>
-    <h4>Items</h4>
-    <hr />
     <dl class="row">
         @foreach (var item in Model)
         {
@@ -22,10 +22,10 @@
     </dl>
 </div>
 <div>
-    @*<a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |*@
     @if (User.IsInRole("admin"))
     {
-        <a asp-action="Add" asp-route-id=@ViewBag.Id>add</a>
+        <a asp-action="Add" asp-route-id=@ViewBag.Id>@Localizer["Add"] </a>
+        <hr />
     }
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@Localizer["Back"] </a>
 </div>

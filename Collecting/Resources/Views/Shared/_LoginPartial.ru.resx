@@ -129,6 +129,9 @@
   <data name="Logout" xml:space="preserve">
     <value>Выйти</value>
   </data>
+  <data name="Managing" xml:space="preserve">
+    <value>Управление созданными коллекциями</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Регистрация</value>
   </data>
