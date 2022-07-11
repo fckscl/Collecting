@@ -21,7 +21,7 @@
     </dl>
 </div>
 <div>
-    @if (User.IsInRole("admin"))
+    @if (User.IsInRole("active"))
     {
         <a asp-action="Add" asp-route-temp=@ViewBag.Id>@Localizer["Add"] </a>
         <hr />
