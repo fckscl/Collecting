@@ -84,7 +84,7 @@ namespace Collecting.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(Items item, int id)
+        public async Task<IActionResult> Add(Items item, int temp)
         {
             //using (var transaction = db.Database.BeginTransaction())
             //{
@@ -95,10 +95,10 @@ namespace Collecting.Controllers
             //    db.SaveChanges();
             //    transaction.Commit();
             //}
-            item.CollectionId = id;
+            item.CollectionId = temp;
             db.Items.Add(item);
             await db.SaveChangesAsync();
-            return View("Index");
+            return RedirectToAction("Items", new { id = temp});
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

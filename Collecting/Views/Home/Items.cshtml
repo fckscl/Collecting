@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<Collecting.Models.Items>
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
-@inject Collecting.Data.ApplicationDbContext db
 @{
     ViewData["Title"] = Localizer["Items"];
 }
@@ -24,7 +23,7 @@
 <div>
     @if (User.IsInRole("admin"))
     {
-        <a asp-action="Add" asp-route-id=@ViewBag.Id>@Localizer["Add"] </a>
+        <a asp-action="Add" asp-route-temp=@ViewBag.Id>@Localizer["Add"] </a>
         <hr />
     }
     <a asp-action="Index">@Localizer["Back"] </a>
